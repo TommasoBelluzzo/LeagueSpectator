@@ -14,7 +14,7 @@ LeagueSpectator can run on every machine equipped with Windows 7 or greater. The
 
 Since this project is not meant to be massively distributed and exploited, its communication with `Riot API` endpoints doesn't rely on a global web service capable of proxying queries through a production API key. Instead, the protocol must be configured on a per-user basis by properly filling the `API Key` and `API Version` textboxes. Temporary API keys are well suited for sporadic usage since every existing League of Legends account can obtain one on the [Riot Developer Portal](https://developer.riotgames.com/).
 
-The `Spectate` button will not be available until all the fields of the application have been properly filled. Once clicked, the application will become invisible and the League of Legends client will be launched in spectator mode.
+The `Spectate` button will not be available until all the fields of the application have been properly filled. Once clicked, the application will become invisible and the League of Legends client will be launched in spectator mode. Closing the running League of Legends client instance will bring the application back.
 
 ### Source Code
 
