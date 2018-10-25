@@ -7,6 +7,7 @@ LeagueSpectator is a simple utility for spectating League of Legends matches.
 ### Compatibility
 
 LeagueSpectator can run on every machine equipped with Windows 7 or greater.
+The application requires administration privileges in order to work properly.
 
 ### Usage
 
