@@ -10,6 +10,8 @@ LeagueSpectator can run on every machine equipped with Windows 7 or greater. The
 
 ### Usage
 
+![Interface](https://i.imgur.com/l2Ous1t.png)
+
 ### Source Code
 
 Methods and classes are completely undocumented and the code contains no descriptive comments; I know it's a bad practice, but I really don't have time to create a proper documentation for this project. Nevertheless, everything should be pretty straightforward since it's just a simple form with a few buttons.
