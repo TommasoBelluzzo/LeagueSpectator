@@ -4,6 +4,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Windows.Forms;
+
 #endregion
 
 namespace LeagueSpectator
@@ -16,9 +18,25 @@ namespace LeagueSpectator
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern Boolean GetWindowRect([In] IntPtr windowHandle, [Out] out RECT rectangle);
 
+        [DllImport("User32.dll", CallingConvention=CallingConvention.StdCall, CharSet=CharSet.Unicode, ExactSpelling=true, SetLastError=true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern Boolean IsIconic([In] IntPtr windowHandle);
+
         [DllImport("User32.dll", CallingConvention=CallingConvention.StdCall, CharSet=CharSet.Unicode, ExactSpelling=false, SetLastError=true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern Boolean PostMessage([In, Optional] IntPtr windowHandle, [In] UInt32 message, [In] IntPtr wParameter, [In] IntPtr lParameter);
+
+        [DllImport("User32.dll", CallingConvention=CallingConvention.StdCall, CharSet=CharSet.Unicode, ExactSpelling=true, SetLastError=true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern Boolean RedrawWindow([In] IntPtr windowHandle, [In] ref RECT area, [In] IntPtr hrgn, [In] REDRAWWINDOW_FLAGS flags);
+
+        [DllImport("User32.dll", CallingConvention=CallingConvention.StdCall, CharSet=CharSet.Unicode, ExactSpelling=true, SetLastError=true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern Boolean ReleaseDC([In] IntPtr windowHandle, [In] IntPtr dcHandle);
+
+        [DllImport("User32.dll", CallingConvention=CallingConvention.StdCall, CharSet=CharSet.Unicode, ExactSpelling=true, SetLastError=true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern Boolean SetForegroundWindow([In] IntPtr windowHandle);
 
         [DllImport("User32.dll", CallingConvention=CallingConvention.StdCall, CharSet=CharSet.Unicode, ExactSpelling=true, SetLastError=true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -26,10 +44,17 @@ namespace LeagueSpectator
 
         [DllImport("User32.dll", CallingConvention=CallingConvention.StdCall, CharSet=CharSet.Unicode, ExactSpelling=true, SetLastError=true)]
         [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern Boolean ShowWindow([In] IntPtr windowHandle, [In] SHOWWINDOW_COMMAND command);
+
+        [DllImport("User32.dll", CallingConvention=CallingConvention.StdCall, CharSet=CharSet.Unicode, ExactSpelling=true, SetLastError=true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         private static extern Boolean UnhookWindowsHookEx([In] IntPtr hookHandle);
 
         [DllImport("User32.dll", CallingConvention=CallingConvention.StdCall, CharSet=CharSet.Unicode, ExactSpelling=true, SetLastError=true)]
         private static extern IntPtr CallNextHookEx([In, Optional] IntPtr hookHandle, [In] Int32 code, [In] IntPtr wParameter, [In] IntPtr lParameter);
+
+        [DllImport("User32.dll", CallingConvention=CallingConvention.StdCall, CharSet=CharSet.Unicode, ExactSpelling=true, SetLastError=true)]
+        private static extern IntPtr GetWindowDC([In] IntPtr windowHandle);
 
         [DllImport("User32.dll", CallingConvention=CallingConvention.StdCall, CharSet=CharSet.Unicode, ExactSpelling=false, SetLastError=true)]
         private static extern IntPtr SetWindowsHookEx([In] HOOK_TYPE hookType, [In] HookProcess hookProcess, [In] IntPtr handle, [In] UInt32 threadId);
@@ -112,6 +137,11 @@ namespace LeagueSpectator
             return true;
         }
 
+        public static Boolean IsPaintMessage(Message message)
+        {
+            return (message.Msg == (Int32)WINDOW_MESSAGE.WM_NCPAINT);
+        }
+
         public static Boolean HookActivate(IntPtr lParameter, out IntPtr windowHandle)
         {
             CWPRET_STRUCT parameters = (CWPRET_STRUCT)Marshal.PtrToStructure(lParameter, typeof(CWPRET_STRUCT));
@@ -140,6 +170,11 @@ namespace LeagueSpectator
             return true;
         }
 
+        public static IntPtr GetControlGraphics(Control control)
+        {
+            return GetWindowDC(control.Handle);
+        }
+
         public static IntPtr Hook(HookProcess process)
         {
             UInt32 threadId = GetCurrentThreadId();
@@ -159,6 +194,30 @@ namespace LeagueSpectator
         public static void BroadcastMessage(UInt32 message)
         {
             PostMessage((new IntPtr(0xFFFF)), message, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        public static void RedrawControl(Control control)
+        {
+            RECT rect = new RECT();
+            RedrawWindow(control.Handle, ref rect, IntPtr.Zero, (REDRAWWINDOW_FLAGS.RDW_INVALIDATE | REDRAWWINDOW_FLAGS.RDW_UPDATENOW | REDRAWWINDOW_FLAGS.RDW_FRAME));
+        }
+
+        public static void ReleaseControlGraphics(Control control, IntPtr dcHandle)
+        {
+            ReleaseDC(control.Handle, dcHandle);
+        }
+
+        public static void Restore(Form form)
+        {
+            if (form == null)
+                return;
+
+            IntPtr handle = form.Handle;
+
+            if (IsIconic(handle))
+                ShowWindow(handle, SHOWWINDOW_COMMAND.SW_RESTORE);
+
+            SetForegroundWindow(handle);
         }
 
         public static void SetPosition(IntPtr windowHandle, Rectangle rectangle)
@@ -245,6 +304,27 @@ namespace LeagueSpectator
         [SuppressMessage("ReSharper", "UnusedMember.Local")]
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [Flags]
+        private enum REDRAWWINDOW_FLAGS : uint
+        {
+            #region Values
+            RDW_INVALIDATE = 0x001,
+            RDW_INTERNALPAINT = 0x002,
+            RDW_ERASE = 0x004,
+            RDW_VALIDATE = 0x008,
+            RDW_NOINTERNALPAINT = 0x010,
+            RDW_NOERASE = 0x020,
+            RDW_NOCHILDREN = 0x040,
+            RDW_ALLCHILDREN = 0x080,
+            RDW_UPDATENOW = 0x100,
+            RDW_ERASENOW = 0x200,
+            RDW_FRAME = 0x400,
+            RDW_NOFRAME = 0x800
+            #endregion
+        }
+
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [Flags]
         private enum SETWINDOWPOS_FLAGS : uint
         {
             #region Values
@@ -264,6 +344,26 @@ namespace LeagueSpectator
             SWP_DEFERERASE = 0x2000,
             SWP_ASYNCWINDOWPOS = 0x4000,
             SWP_DEFAULT = SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOOWNERZORDER | SWP_ASYNCWINDOWPOS
+            #endregion
+        }
+
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        private enum SHOWWINDOW_COMMAND
+        {
+            #region Values
+            SW_HIDE = 0x0,
+            SW_SHOWNORMAL = 0x1,
+            SW_SHOWMINIMIZED = 0x2,
+            SW_SHOWMAXIMIZED = 0x3,
+            SW_SHOWNOACTIVATE = 0x4,
+            SW_SHOW = 0x5,
+            SW_MINIMIZE = 0x6,
+            SW_SHOWMINNOACTIVE = 0x7,
+            SW_SHOWNA = 0x8,
+            SW_RESTORE = 0x9,
+            SW_SHOWDEFAULT = 0xA,
+            SW_FORCEMINIMIZE = 0xB
             #endregion
         }
 

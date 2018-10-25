@@ -22,5 +22,29 @@ namespace LeagueSpectator.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string APIKey {
+            get {
+                return ((string)(this["APIKey"]));
+            }
+            set {
+                this["APIKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("v3")]
+        public string APIVersion {
+            get {
+                return ((string)(this["APIVersion"]));
+            }
+            set {
+                this["APIVersion"] = value;
+            }
+        }
     }
 }

@@ -70,6 +70,15 @@ namespace LeagueSpectator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Either the specified summoner is not currently playing a match or the API request failed..
+        /// </summary>
+        internal static string ErrorGameInfo {
+            get {
+                return ResourceManager.GetString("ErrorGameInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The string is empty..
         /// </summary>
         internal static string ErrorStringEmpty {
@@ -88,6 +97,15 @@ namespace LeagueSpectator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Either the specified summoner name could not be found or the API request failed..
+        /// </summary>
+        internal static string ErrorSummonerName {
+            get {
+                return ResourceManager.GetString("ErrorSummonerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An unhandled exception has occurred and the application must be terminated..
         /// </summary>
         internal static string ErrorUnhandledException {
@@ -102,6 +120,24 @@ namespace LeagueSpectator.Properties {
         internal static string FilterGameClient {
             get {
                 return ResourceManager.GetString("FilterGameClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to API Key:.
+        /// </summary>
+        internal static string TextAPIKey {
+            get {
+                return ResourceManager.GetString("TextAPIKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to API Version:.
+        /// </summary>
+        internal static string TextAPIVersion {
+            get {
+                return ResourceManager.GetString("TextAPIVersion", resourceCulture);
             }
         }
         

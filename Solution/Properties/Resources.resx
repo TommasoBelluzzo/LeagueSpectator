@@ -120,17 +120,29 @@
   <data name="ErrorAttribute" xml:space="preserve">
     <value>The attribute cannot be null or empty.</value>
   </data>
+  <data name="ErrorGameInfo" xml:space="preserve">
+    <value>Either the specified summoner is not currently playing a match or the API request failed.</value>
+  </data>
   <data name="ErrorStringEmpty" xml:space="preserve">
     <value>The string is empty.</value>
   </data>
   <data name="ErrorStringSeparators" xml:space="preserve">
     <value>No string split separators have been provided.</value>
   </data>
+  <data name="ErrorSummonerName" xml:space="preserve">
+    <value>Either the specified summoner name could not be found or the API request failed.</value>
+  </data>
   <data name="ErrorUnhandledException" xml:space="preserve">
     <value>An unhandled exception has occurred and the application must be terminated.</value>
   </data>
   <data name="FilterGameClient" xml:space="preserve">
     <value>Game Client|League of Legends.exe</value>
+  </data>
+  <data name="TextAPIKey" xml:space="preserve">
+    <value>API Key:</value>
+  </data>
+  <data name="TextAPIVersion" xml:space="preserve">
+    <value>API Version:</value>
   </data>
   <data name="TextCopy" xml:space="preserve">
     <value>Copy</value>
