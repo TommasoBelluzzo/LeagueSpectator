@@ -1,10 +1,12 @@
 # LeagueSpectator
 
-Inspired by UO Loop, MacroUO is a simple third party macro utility for Ultima Online designed for Windows operating systems. I am still maintaining it because a lot of people I know are still playing Ultima Online and, over the past years, it became very popular on some servers.
+LeagueSpectator is a simple utility for spectating League of Legends matches.
 
 ## Documentation
 
-### Usage
+### Compatibility
+
+LeagueSpectator can run on every machine equipped with Windows 7 or greater.
 
 #### Options
 
