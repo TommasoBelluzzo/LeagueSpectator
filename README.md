@@ -4,7 +4,7 @@ LeagueSpectator is a simple utility for spectating League of Legends matches.
 
 ## Requirements
 
-LeagueSpectator can run on every machine equipped with Windows 7 or greater. The application requires administration privileges in order to work properly; a semi-automatic elevation routine is included in the application manifest file.
+LeagueSpectator is platform-agnostic, therefore it can be used on both x86 and x64 environments. The solution model targets Visual Studio 2017 and the projects are compiled under .NET Framework 4.7.1, therefore it can run on every machine equipped with Windows 7 or greater. The application requires administration privileges in order to work properly; a semi-automatic elevation routine is included in the application manifest file.
 
 ## Usage
 
