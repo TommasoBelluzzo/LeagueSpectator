@@ -2,13 +2,11 @@
 
 LeagueSpectator is a simple utility for spectating League of Legends matches.
 
-## Documentation
-
-### Compatibility
+## Requirements
 
 LeagueSpectator can run on every machine equipped with Windows 7 or greater. The application requires administration privileges in order to work properly; a semi-automatic elevation routine is included in the application manifest file.
 
-### Usage
+## Usage
 
 ![Interface](https://i.imgur.com/l2Ous1t.png)
 
@@ -16,6 +14,6 @@ Since this project is not meant to be massively distributed and exploited, its c
 
 The `Spectate` button will not be available until all the fields of the application have been properly filled. Once clicked, the application will become invisible and the League of Legends client will be launched in spectator mode. Closing the running League of Legends client instance will bring the application back.
 
-### Source Code
+## Source Code
 
 Methods and classes are completely undocumented and the code contains no descriptive comments; I know it's a bad practice, but I really don't have time to create a proper documentation for this project. Nevertheless, everything should be pretty straightforward since it's just a simple form with a few buttons.
