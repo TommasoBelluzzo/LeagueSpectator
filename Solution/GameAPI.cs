@@ -33,7 +33,7 @@ namespace LeagueSpectator
                 HttpResponseMessage response;
 
                 using (HttpClient client = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip }) { Timeout = TimeSpan.FromSeconds(200) })
-                    response = await client.SendAsync(request).ConfigureAwait(false);
+                    response = await client.SendAsync(request);
 
                 if ((Int32)response.StatusCode == 429)
                 {
@@ -51,7 +51,7 @@ namespace LeagueSpectator
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    Stream content = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                    Stream content = await response.Content.ReadAsStreamAsync();
                     DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
                        
                     return (T)serializer.ReadObject(content);
