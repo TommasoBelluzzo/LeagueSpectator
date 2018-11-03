@@ -92,7 +92,7 @@ namespace LeagueSpectator
                 s_ExceptionHandled = true;
 
                 if (e == null)
-                    e = new Exception("An unknown exception has occurred and the application must be terminated.");
+                    e = new Exception(Resources.ErrorUnhandledException);
 
                 using (ExceptionDialog dialog = new ExceptionDialog(e))
                     dialog.Prompt();

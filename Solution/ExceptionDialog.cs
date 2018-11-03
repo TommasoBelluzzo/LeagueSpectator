@@ -182,14 +182,12 @@ namespace LeagueSpectator
             Form form = Program.Form;
 
             if ((form == null) || form.IsDisposed)
-            {
                 base.ShowDialog();
-                return;
+            else
+            {
+                StartPosition = FormStartPosition.CenterParent;
+                base.ShowDialog(form);
             }
-
-            StartPosition = FormStartPosition.CenterParent;
-
-            base.ShowDialog(form);
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
