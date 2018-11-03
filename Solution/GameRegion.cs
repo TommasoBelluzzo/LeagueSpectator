@@ -39,7 +39,9 @@ namespace LeagueSpectator
         #endregion
 
         #region Constructors
-        public GameRegion(String name, String code, String endPoint, String spectatorEndPoint, UInt16 spectatorPort)
+        private GameRegion() { }
+            
+        private GameRegion(String name, String code, String endPoint, String spectatorEndPoint, UInt16 spectatorPort)
         {
             if (String.IsNullOrWhiteSpace(name))
                 throw new ArgumentException(Resources.ErrorAttribute, nameof(name));
