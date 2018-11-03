@@ -39,8 +39,6 @@ namespace LeagueSpectator
         #endregion
 
         #region Constructors
-        private GameRegion() { }
-            
         private GameRegion(String name, String code, String endPoint, String spectatorEndPoint, UInt16 spectatorPort)
         {
             if (String.IsNullOrWhiteSpace(name))
