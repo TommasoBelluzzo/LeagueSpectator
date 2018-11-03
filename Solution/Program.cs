@@ -15,7 +15,9 @@ namespace LeagueSpectator
     public static class Program
     {
         #region Members
+        private static Boolean s_ExceptionHandled;
         private static Mutex s_Mutex;
+        private static Object s_Lock;
         #endregion
 
         #region Properties
@@ -49,6 +51,8 @@ namespace LeagueSpectator
                 return;
             }
 
+            s_Lock = new Object();
+            
             Stream stream = assembly.GetManifestResourceStream("LeagueSpectator.Properties.Application.ico");
 
             if (stream != null)
@@ -80,13 +84,21 @@ namespace LeagueSpectator
         #region Methods
         private static void HandleException(Exception e)
         {
-            if (e == null)
-                e = new ApplicationException(Resources.TextUnknownException);
+            lock (s_Lock)
+            {
+                if (s_ExceptionHandled)
+                    return;
 
-            using (ExceptionDialog dialog = new ExceptionDialog(e))
-                dialog.Prompt();
+                s_ExceptionHandled = true;
 
-            Application.Exit();
+                if (e == null)
+                    e = new Exception("An unknown exception has occurred and the application must be terminated.");
+
+                using (ExceptionDialog dialog = new ExceptionDialog(e))
+                    dialog.Prompt();
+
+                Application.Exit();
+            }
         }
         #endregion
     }
