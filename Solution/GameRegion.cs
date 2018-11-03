@@ -1,7 +1,6 @@
 ﻿#region Using Directives
 using System;
 using LeagueSpectator.Properties;
-
 #endregion
 
 namespace LeagueSpectator
