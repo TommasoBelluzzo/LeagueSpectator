@@ -298,6 +298,8 @@ namespace LeagueSpectator
         #region Methods
         private void DisableInterface()
         {
+            SuspendLayout();
+
             m_ButtonSpectate.Enabled = false;
 
             m_TextBoxAPIKey.Enabled = false;
@@ -308,10 +310,14 @@ namespace LeagueSpectator
 
             m_TextBoxSummonerName.Enabled = false;
             m_ComboBoxGameRegion.Enabled = false;
+
+            ResumeLayout(true);
         }
 
         private void EnableInterface()
         {
+            SuspendLayout();
+
             m_TextBoxAPIKey.Enabled = true;
             m_TextBoxAPIVersion.Enabled = true;
 
@@ -322,6 +328,8 @@ namespace LeagueSpectator
             m_ComboBoxGameRegion.Enabled = true;
 
             m_ButtonSpectate.Enabled = true;
+
+            ResumeLayout(true);
         }
 
         private void ValidateInput()
