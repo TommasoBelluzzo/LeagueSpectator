@@ -231,7 +231,6 @@ namespace LeagueSpectator
         #endregion
 
         #region Nesting (Delegates)
-        public delegate Boolean EnumWindowsProcess(IntPtr windowHandle, IntPtr lParameter);
         public delegate IntPtr HookProcess(Int32 code, IntPtr wParameter, IntPtr lParameter);
         #endregion
 
