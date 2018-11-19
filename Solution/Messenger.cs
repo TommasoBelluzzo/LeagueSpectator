@@ -167,7 +167,7 @@ namespace LeagueSpectator
             s_HookProcessDelegate = hookProcess;
             m_HookHandle = NativeMethods.Hook(s_HookProcessDelegate);
         }
-        
+
         protected override void Dispose(Boolean disposing)
         {
             if (disposing)

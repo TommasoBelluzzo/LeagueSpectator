@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace LeagueSpectator
 {
-    public class TextBoxError : TextBox
+    public sealed class TextBoxError : TextBox
     {
         #region Members
         private Boolean m_Error;
@@ -17,7 +17,12 @@ namespace LeagueSpectator
         #endregion
 
         #region Properties
-        protected sealed override Boolean DoubleBuffered => true;
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        protected override Boolean DoubleBuffered
+        {
+            get => true;
+            set { }
+        }
 
         [Browsable(false)]
         public Boolean Error
