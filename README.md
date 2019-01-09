@@ -16,4 +16,4 @@ The `Spectate` button will not be available until all the fields of the applicat
 
 ## Source Code
 
-Methods and classes are completely undocumented and the code contains no descriptive comments; I know it's a bad practice, but I really don't have time to create a proper documentation for this project. Nevertheless, everything should be pretty straightforward since it's just a simple form with a few buttons.
+The classes are completely undocumented and the code contains no descriptive comments; I know it's bad practice, but I really don't have time to create a proper documentation for this project. Nonetheless, everything should be pretty straightforward since it's just a simple form with a few buttons.
