@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Information
-[assembly: AssemblyDescription("A simple utility for spectating League of Legends matches.")]
 [assembly: AssemblyCompany("Tommaso Belluzzo")]
 
 #if (DEBUG)
@@ -18,7 +17,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright ©2018 Tommaso Belluzzo")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyProduct("LeagueSpectator")]
-[assembly: AssemblyTitle("LeagueSpectator")]
+[assembly: AssemblyTitle("A simple utility for spectating League of Legends matches.")]
 [assembly: AssemblyTrademark("")]
 #endregion
 
